@@ -31,7 +31,6 @@ public class spawn : MonoBehaviour
 
         float spawnX = Random.Range(-screenWidth, screenWidth); // Random x position
         spawnPosition.x = spawnX; // Set x value of spawn position
-        spawnPosition.z = 0; // Ensure z value is 0
         GameObject sphere = Instantiate(spherePrefab, spawnPosition, Quaternion.identity); // Instantiate sphere
         Rigidbody rb = sphere.AddComponent<Rigidbody>(); // Add Rigidbody component
         rb.linearVelocity = new Vector3(0, -startSpeed, 0); // Set initial velocity

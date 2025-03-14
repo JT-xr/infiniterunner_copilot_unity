@@ -187,7 +187,7 @@ MonoBehaviour:
   spawnLimit: 60
   startLifetime: 1.5
   startSpeed: 2.5
-  spawnPosition: {x: 0, y: 0, z: 0}
+  spawnPosition: {x: 0, y: 10, z: -6}
 --- !u!4 &613772917
 Transform:
   m_ObjectHideFlags: 0
@@ -937,12 +937,12 @@ PrefabInstance:
     - target: {fileID: 6550433274861733651, guid: ca7a89fd453bb4d5ca20e4f164642b36,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.2653122
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 6550433274861733651, guid: ca7a89fd453bb4d5ca20e4f164642b36,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.3370364
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6550433274861733651, guid: ca7a89fd453bb4d5ca20e4f164642b36,
         type: 3}
