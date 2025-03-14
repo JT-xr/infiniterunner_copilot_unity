@@ -6,6 +6,8 @@ TagManager:
   tags:
   - facePrefab
   - spherePrefab
+  - baditemPrefab
+  - goodItemPrefab
   layers:
   - Default
   - TransparentFX
