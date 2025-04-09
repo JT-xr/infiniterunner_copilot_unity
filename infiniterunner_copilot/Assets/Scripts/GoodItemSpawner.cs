@@ -38,6 +38,7 @@ public class GoodItemSpawner : MonoBehaviour
         GameObject goodItem = Instantiate(goodItemPrefab, spawnPosition, Quaternion.identity); // Instantiate good item
         Rigidbody rb = goodItem.AddComponent<Rigidbody>(); // Add Rigidbody component
         rb.linearVelocity = new Vector3(0, -startSpeed, 0); // Set initial velocity
+        goodItem.tag = "goodItemPrefab"; // Corrected tag name for collision detection
         Destroy(goodItem, startLifetime); // Destroy good item after lifetime
         currentSpawnCount++; // Increment spawn count
         spawnTimer += spawnRate; // Increment spawn timer
@@ -50,6 +51,7 @@ public class GoodItemSpawner : MonoBehaviour
 
     void Update()
     {
-        currentSpawnCount = GameObject.FindGameObjectsWithTag("GoodItem").Length; // Update spawn count
+        currentSpawnCount = GameObject.FindGameObjectsWithTag("goodItemPrefab").Length; // Update spawn count
+        Debug.Log("Current Spawn Count: " + currentSpawnCount);
     }
 }

@@ -35,7 +35,7 @@ public class GameTimer : MonoBehaviour
     private void UpdateTimerText()
     {
         int seconds = Mathf.FloorToInt(timeRemaining % 60);
-        timerText.text = "clock\n:" + seconds.ToString("00");
+        timerText.text = "Clock: " + seconds.ToString("00");
 
         // Change color to red when time is less than or equal to 20 seconds
         if (timeRemaining <= 20)
