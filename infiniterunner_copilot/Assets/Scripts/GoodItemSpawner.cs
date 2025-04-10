@@ -8,22 +8,22 @@ public class GoodItemSpawner : MonoBehaviour
     public int spawnLimit = 10; // Max number of good items to spawn
     public float startLifetime = 5f; // Lifetime of each good item
     public float startSpeed = 3f; // Initial speed of the good item
-    public Camera orthographicCamera; // Reference to the orthographic camera
+    public Canvas canvas; // Reference to the Canvas
 
     private float spawnTimer; // Timer for spawn duration
     private int currentSpawnCount = 0; // Current number of spawned good items
-    private float screenWidth; // Screen width in world units
+    private float screenWidth; // Screen width in canvas units
 
     public Vector3 spawnPosition = new Vector3(0, 0, 0); // Spawn position
 
     void Start()
     {
-        if (orthographicCamera == null)
+        if (canvas == null)
         {
-            orthographicCamera = Camera.main; // Default to main camera if not set
+            canvas = FindObjectOfType<Canvas>(); // Default to the first Canvas found if not set
         }
 
-        screenWidth = orthographicCamera.orthographicSize * orthographicCamera.aspect; // Calculate screen width
+        screenWidth = canvas.GetComponent<RectTransform>().rect.width / 2; // Calculate screen width
         InvokeRepeating("SpawnGoodItem", 0f, spawnRate); // Start spawning good items
     }
 
@@ -33,12 +33,20 @@ public class GoodItemSpawner : MonoBehaviour
 
         float spawnX = Random.Range(-screenWidth, screenWidth); // Random x position
         spawnPosition.x = spawnX; // Set x value of spawn position
+        spawnPosition.y = canvas.GetComponent<RectTransform>().rect.height / 2; // Set y value to top of the canvas
         spawnPosition.z = 0; // Ensure z value is 0
 
-        GameObject goodItem = Instantiate(goodItemPrefab, spawnPosition, Quaternion.identity); // Instantiate good item
-        Rigidbody rb = goodItem.AddComponent<Rigidbody>(); // Add Rigidbody component
-        rb.linearVelocity = new Vector3(0, -startSpeed, 0); // Set initial velocity
-        goodItem.tag = "goodItemPrefab"; // Corrected tag name for collision detection
+        GameObject goodItem = Instantiate(goodItemPrefab, canvas.transform); // Instantiate good item as child of canvas
+        RectTransform rectTransform = goodItem.GetComponent<RectTransform>();
+        rectTransform.anchoredPosition = spawnPosition; // Set anchored position
+
+        Rigidbody2D rb = goodItem.AddComponent<Rigidbody2D>(); // Add Rigidbody2D component
+        rb.gravityScale = 0; // Disable gravity for UI elements
+        rb.linearVelocity = new Vector2(0, -startSpeed); // Set initial velocity
+
+        BoxCollider2D collider = goodItem.AddComponent<BoxCollider2D>(); // Add BoxCollider2D component
+        collider.isTrigger = true; // Enable trigger for collision detection
+
         Destroy(goodItem, startLifetime); // Destroy good item after lifetime
         currentSpawnCount++; // Increment spawn count
         spawnTimer += spawnRate; // Increment spawn timer
