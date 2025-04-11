@@ -6,12 +6,20 @@ public class GameTimer : MonoBehaviour
     public Text timerText;
     private float timeRemaining = 60f;
     private bool timerIsRunning = false;
+    public Button restartButton; // Reference to the restart button
 
     private void Start()
     {
         // Start the timer
         timerIsRunning = true;
         UpdateTimerText();
+
+        // Hide the restart button initially
+        if (restartButton != null)
+        {
+            restartButton.gameObject.SetActive(false);
+            restartButton.onClick.AddListener(RestartGame);
+        }
     }
 
     private void Update()
@@ -28,6 +36,12 @@ public class GameTimer : MonoBehaviour
                 timeRemaining = 0;
                 timerIsRunning = false;
                 UpdateTimerText();
+
+                // Show the restart button when the timer reaches zero
+                if (restartButton != null)
+                {
+                    restartButton.gameObject.SetActive(true);
+                }
             }
         }
     }
@@ -41,6 +55,23 @@ public class GameTimer : MonoBehaviour
         if (timeRemaining <= 20)
         {
             timerText.color = Color.red;
+        }
+    }
+
+    private void RestartGame()
+    {
+        // Reset the timer
+        timeRemaining = 60f;
+        timerIsRunning = true;
+        UpdateTimerText();
+
+        // Reset the score using ScoreManager
+        ScoreManager.Instance.ResetScore();
+
+        // Hide the restart button
+        if (restartButton != null)
+        {
+            restartButton.gameObject.SetActive(false);
         }
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI; // For UI elements
+using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private float screenBoundaryRight;
     private float playerWidth;
     private RectTransform rectTransform;
+
+    private ARFaceManager arFaceManager; // AR Face Manager for head tracking
 
     void Start()
     {
@@ -28,25 +31,72 @@ public class PlayerController : MonoBehaviour
         Vector3 startPosition = rectTransform.anchoredPosition;
         startPosition.y = -canvasRect.rect.height / 2 + playerWidth;
         rectTransform.anchoredPosition = startPosition;
+
+        // Initialize AR Face Manager
+        arFaceManager = Object.FindFirstObjectByType<ARFaceManager>();
+        if (arFaceManager == null)
+        {
+            Debug.LogError("ARFaceManager not found. Ensure AR Foundation is set up correctly.");
+        }
     }
 
     void Update()
     {
-        // Get horizontal input (left/right arrow keys)
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float horizontalInput = 0;
 
-        // Debugging user input
-        if (horizontalInput < 0)
+        // Declare newPosition at the beginning of the Update method
+        Vector2 newPosition = rectTransform.anchoredPosition;
+
+        if (arFaceManager != null && arFaceManager.trackables.count > 0)
         {
-            Debug.Log("left");
+            // Get the first tracked face
+            ARFace face = null;
+            foreach (var trackedFace in arFaceManager.trackables)
+            {
+                face = trackedFace;
+                break; // Get the first face and exit the loop
+            }
+
+            // Adjust horizontal input to align with the center of the screen when head rotation is zero
+            if (face != null)
+            {
+                // Get the head rotation (yaw) in local space
+                float headRotation = face.transform.localEulerAngles.y;
+
+                // Normalize head rotation to a range of [-180, 180]
+                if (headRotation > 180f)
+                {
+                    headRotation -= 360f;
+                }
+
+                // Inverse the mapping logic
+                float normalizedRotation = Mathf.Clamp(-headRotation / 30f, -1f, 1f); // Normalize to [-1, 1] and invert
+                float targetXPosition = Mathf.Lerp(screenBoundaryLeft, screenBoundaryRight, (normalizedRotation + 1f) / 2f); // Map to screen boundaries
+
+                // Update position directly
+                newPosition = rectTransform.anchoredPosition;
+                newPosition.x = targetXPosition;
+                rectTransform.anchoredPosition = newPosition;
+
+                Debug.Log($"Head rotation: {headRotation}, Target X Position: {targetXPosition}");
+            }
         }
-        else if (horizontalInput > 0)
+        else
         {
-            Debug.Log("right");
+            // Fallback to keyboard input
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            newPosition = rectTransform.anchoredPosition + new Vector2(horizontalInput * moveSpeed * Time.deltaTime, 0);
         }
 
-        // Calculate new position
-        Vector2 newPosition = rectTransform.anchoredPosition + new Vector2(horizontalInput * moveSpeed * Time.deltaTime, 0);
+        // Ensure newPosition is updated correctly based on AR or keyboard input
+        if (arFaceManager != null && arFaceManager.trackables.count > 0) {
+            // AR-based position update logic
+            // ...existing code...
+        } else {
+            // Fallback to keyboard input
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            newPosition = rectTransform.anchoredPosition + new Vector2(horizontalInput * moveSpeed * Time.deltaTime, 0);
+        }
 
         // Clamp position to screen boundaries
         newPosition.x = Mathf.Clamp(newPosition.x, screenBoundaryLeft, screenBoundaryRight);

@@ -31,6 +31,12 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreDisplay();
     }
 
+    public void ResetScore()
+    {
+        currentScore = 0;
+        UpdateScoreDisplay();
+    }
+
     private void UpdateScoreDisplay()
     {
         scoreText.text = "Score: " + currentScore.ToString();
