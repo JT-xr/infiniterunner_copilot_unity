@@ -1,3 +1,17 @@
+/// <summary>
+/// Controls a countdown game timer, updates the timer UI, and manages the restart button.
+/// 
+/// - Displays the remaining time in seconds on a UI Text element.
+/// - Changes the timer text color to red when 20 seconds or less remain.
+/// - Shows a restart button when the timer reaches zero.
+/// - Resets the timer and score when the restart button is pressed.
+/// 
+/// Dependencies:
+/// - Requires a reference to a UI Text for displaying the timer.
+/// - Requires a reference to a UI Button for restarting the game.
+/// - Assumes a singleton ScoreManager with a ResetScore() method.
+/// </summary>
+ 
 using UnityEngine;
 using UnityEngine.UI;
 

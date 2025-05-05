@@ -1,3 +1,15 @@
+
+
+/// <summary>
+/// Controls the player character in an infinite runner game using either AR face tracking (head rotation) or keyboard input.
+/// 
+/// - Uses AR Foundation's <see cref="ARFaceManager"/> to track the player's head rotation and map it to horizontal movement within screen boundaries.
+/// - Falls back to keyboard input (left/right arrows or A/D) if AR face tracking is unavailable.
+/// - Keeps the player within the visible area of the UI canvas.
+/// - Handles collision detection with objects tagged as "goodItemPrefab", updating the player's score and UI accordingly.
+/// - Includes additional trigger debugger classes for logging collision events for debugging purposes.
+/// </summary>
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;

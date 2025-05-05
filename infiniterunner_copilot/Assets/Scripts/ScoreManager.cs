@@ -1,5 +1,12 @@
+/// <summary>
+/// The ScoreManager class is responsible for managing the player's score in the game.
+/// It provides functionality to add points, reset the score, and update the score display.
+/// This class implements the Singleton pattern to ensure only one instance exists during runtime.
+/// </summary>
+
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class ScoreManager : MonoBehaviour
 {

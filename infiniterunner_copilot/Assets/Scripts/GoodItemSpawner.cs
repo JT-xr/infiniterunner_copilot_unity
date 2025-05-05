@@ -1,3 +1,10 @@
+/// <summary>
+/// Spawns "good item" prefabs at random horizontal positions along the top of a UI Canvas at regular intervals,
+/// up to a specified limit and within a total spawn duration. Each spawned item is given a Rigidbody2D for movement,
+/// a BoxCollider2D for collision detection, and is destroyed after a set lifetime. The script tracks the number of
+/// active good items and stops spawning when the duration or limit is reached.
+/// </summary>
+
 using UnityEngine;
 
 public class GoodItemSpawner : MonoBehaviour

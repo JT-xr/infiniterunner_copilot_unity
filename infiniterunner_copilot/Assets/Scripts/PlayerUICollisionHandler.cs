@@ -1,3 +1,9 @@
+/// <summary>
+/// Handles collision events between the player and UI-related objects in the game.
+/// Specifically, it increments the player's score when colliding with objects tagged as "goodItemPrefab"
+/// and destroys those objects upon collision.
+/// </summary>
+/// 
 using UnityEngine;
 
 public class PlayerUICollisionHandler : MonoBehaviour

@@ -1,3 +1,10 @@
+/// <summary>
+/// Singleton GameManager class responsible for managing core game state.
+/// Ensures only one instance persists across scenes using DontDestroyOnLoad.
+/// Provides a method to reset the player's score by delegating to the ScoreManager.
+/// </summary>
+
+
 using UnityEngine;
 
 public class GameManager : MonoBehaviour

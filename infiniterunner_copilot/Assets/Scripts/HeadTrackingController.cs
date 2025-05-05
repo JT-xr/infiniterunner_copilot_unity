@@ -1,3 +1,10 @@
+/// <summary>
+/// Controls the horizontal movement of a UI element based on the user's head position detected via AR face tracking.
+/// Utilizes ARFoundation's <see cref="ARFaceManager"/> to track faces and maps the first detected face's local X position
+/// to the anchored position of a specified <see cref="RectTransform"/> (playerUI) within screen boundaries.
+/// Includes debug logging for face detection status and position.
+/// </summary>
+
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
