@@ -1,5 +1,3 @@
-
-
 /// <summary>
 /// Controls the player character in an infinite runner game using either AR face tracking (head rotation) or keyboard input.
 /// 
@@ -116,7 +114,7 @@ public class PlayerController : MonoBehaviour
         // Update position
         rectTransform.anchoredPosition = newPosition;
 
-        Debug.Log("Player position: " + rectTransform.anchoredPosition);
+        // Debug.Log("Player position: " + rectTransform.anchoredPosition); // Disabled position debug log
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

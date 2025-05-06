@@ -14,7 +14,8 @@ public class ScoreManager : MonoBehaviour
     
     [SerializeField] private Text scoreText;
     private int currentScore = 0;
-    
+    public bool canUpdateScore = true; // Controls if score can be updated
+
     private void Awake()
     {
         if (Instance == null)
@@ -34,6 +35,12 @@ public class ScoreManager : MonoBehaviour
 
     public void AddPoints(int points)
     {
+        // Prevent score update if not allowed
+        if (!canUpdateScore)
+        {
+            Debug.Log("AddPoints called but ignored because canUpdateScore is false.");
+            return;
+        }
         currentScore += points;
         UpdateScoreDisplay();
     }

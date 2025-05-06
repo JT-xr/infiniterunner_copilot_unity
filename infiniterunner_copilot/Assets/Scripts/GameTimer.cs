@@ -18,12 +18,14 @@ using UnityEngine.UI;
 public class GameTimer : MonoBehaviour
 {
     public Text timerText;
-    private float timeRemaining = 60f;
+    public float timeRemaining = 60f; // Made public for Inspector access
+    private float initialTime; // Store the initial value set in Inspector
     private bool timerIsRunning = false;
     public Button restartButton; // Reference to the restart button
 
     private void Start()
     {
+        initialTime = timeRemaining; // Save the value set in Inspector
         // Start the timer
         timerIsRunning = true;
         UpdateTimerText();
@@ -74,8 +76,8 @@ public class GameTimer : MonoBehaviour
 
     private void RestartGame()
     {
-        // Reset the timer
-        timeRemaining = 60f;
+        // Reset the timer to the initial value set in Inspector
+        timeRemaining = initialTime;
         timerIsRunning = true;
         UpdateTimerText();
 
