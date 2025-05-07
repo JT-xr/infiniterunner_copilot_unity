@@ -27,7 +27,7 @@ public class GoodItemSpawner : MonoBehaviour
     {
         if (canvas == null)
         {
-            canvas = FindObjectOfType<Canvas>(); // Default to the first Canvas found if not set
+            canvas = FindFirstObjectByType<Canvas>(); // Default to the first Canvas found if not set
         }
 
         screenWidth = canvas.GetComponent<RectTransform>().rect.width / 2; // Calculate screen width
@@ -68,5 +68,16 @@ public class GoodItemSpawner : MonoBehaviour
     {
         currentSpawnCount = GameObject.FindGameObjectsWithTag("goodItemPrefab").Length; // Update spawn count
         Debug.Log("Current Spawn Count: " + currentSpawnCount);
+    }
+
+    public void StopSpawning()
+    {
+        CancelInvoke("SpawnGoodItem");
+    }
+
+    public void RestartSpawning()
+    {
+        CancelInvoke("SpawnGoodItem");
+        InvokeRepeating("SpawnGoodItem", 0f, spawnRate);
     }
 }

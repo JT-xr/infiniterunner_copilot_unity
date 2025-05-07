@@ -9,14 +9,11 @@
 /// </summary>
 
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 8f; // Movement speed
-    [SerializeField] private Text scoreText; // UI Text to display the score
-    private int score = 0; // Player's score
     private float screenBoundaryLeft;
     private float screenBoundaryRight;
     private float playerWidth;
@@ -125,24 +122,20 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Collision with goodItemPrefab detected!"); // Log if the tag matches
 
-            // Update score by 3 points
-            score += 3;
-
-            // Update the score UI
-            if (scoreText != null)
+            // Add points using ScoreManager (centralized score logic)
+            if (ScoreManager.Instance != null)
             {
-                scoreText.text = "Score: " + score;
-                Debug.Log("Score updated to: " + score); // Log the updated score
+                ScoreManager.Instance.AddPoints(3);
             }
             else
             {
-                Debug.LogWarning("ScoreText UI element is not assigned!"); // Warn if scoreText is null
+                Debug.LogWarning("ScoreManager.Instance is null!");
             }
         }
         else
         {
-            Debug.Log("Collision with an object that does not have the 'goodItemPrefab' tag."); // Log if the tag doesn't match
-            Debug.Log("Collided object's tag: " + collision.gameObject.tag); // Log the tag of the collided object
+            Debug.Log("Collision with an object that does not have the 'goodItemPrefab' tag.");
+            Debug.Log("Collided object's tag: " + collision.gameObject.tag);
         }
     }
 }

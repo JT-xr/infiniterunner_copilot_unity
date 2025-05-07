@@ -35,10 +35,10 @@ public class ScoreManager : MonoBehaviour
 
     public void AddPoints(int points)
     {
-        // Prevent score update if not allowed
-        if (!canUpdateScore)
+        // Prevent score update if not allowed or game is not active
+        if (!canUpdateScore || !GameManager.isGameActive)
         {
-            Debug.Log("AddPoints called but ignored because canUpdateScore is false.");
+            Debug.Log("AddPoints called but ignored because canUpdateScore is false or game is not active.");
             return;
         }
         currentScore += points;
@@ -48,6 +48,13 @@ public class ScoreManager : MonoBehaviour
     public void ResetScore()
     {
         currentScore = 0;
+        canUpdateScore = true; // Ensure score can be updated after reset
+        Debug.Log("ScoreManager: ResetScore called. Score reset to 0.");
+        if (scoreText == null)
+        {
+            scoreText = FindFirstObjectByType<Text>(); // Try to recover reference if lost
+            Debug.LogWarning("ScoreManager: scoreText reference was null. Attempted to recover.");
+        }
         UpdateScoreDisplay();
     }
 

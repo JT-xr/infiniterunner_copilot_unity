@@ -42,6 +42,7 @@ public class Spawner : MonoBehaviour
         spawnPosition.z = 0; // Ensure z value is 0
 
         GameObject image = Instantiate(imagePrefab, spawnPosition, Quaternion.identity, canvas.transform); // Instantiate image as child of canvas
+        image.tag = "baditemPrefab"; // Set tag for game end logic
         RectTransform rectTransform = image.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = spawnPosition; // Set anchored position
 
@@ -60,6 +61,17 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         currentSpawnCount = GameObject.FindGameObjectsWithTag("Sphere").Length; // Update spawn count
+    }
+
+    public void StopSpawning()
+    {
+        CancelInvoke("SpawnImage");
+    }
+
+    public void RestartSpawning()
+    {
+        CancelInvoke("SpawnImage");
+        InvokeRepeating("SpawnImage", 0f, spawnRate);
     }
 }
 
