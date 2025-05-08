@@ -12,11 +12,22 @@ public class PlayerUICollisionHandler : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("OnTriggerEnter2D called with object: " + other.gameObject.name + ", tag: " + other.tag);
+
         if (other.CompareTag("goodItemPrefab")) // Check if the colliding object is a Good Item
         {
             score++; // Increment score
             Destroy(other.gameObject); // Destroy the Good Item
             Debug.Log("Score: " + score); // Log the updated score
+        }
+        else if (other.CompareTag("baditemPrefab")) // Check if the colliding object is a Bad Item
+        {
+            Destroy(other.gameObject); // Hide the Bad Item
+            Debug.Log("Bad item collided and hidden.");
+        }
+        else
+        {
+            Debug.LogWarning("Unknown tag detected: " + other.tag + " on object: " + other.gameObject.name);
         }
     }
 }

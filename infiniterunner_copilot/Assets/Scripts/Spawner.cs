@@ -48,6 +48,10 @@ public class Spawner : MonoBehaviour
 
         Rigidbody2D rb = image.AddComponent<Rigidbody2D>(); // Add Rigidbody2D component
         rb.linearVelocity = new Vector2(0, -startSpeed); // Set initial velocity
+
+        BoxCollider2D collider = image.AddComponent<BoxCollider2D>(); // Add BoxCollider2D component
+        collider.isTrigger = true; // Enable trigger for collision detection
+
         Destroy(image, startLifetime); // Destroy image after lifetime
         currentSpawnCount++; // Increment spawn count
         spawnTimer += spawnRate; // Increment spawn timer
@@ -60,7 +64,7 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-        currentSpawnCount = GameObject.FindGameObjectsWithTag("Sphere").Length; // Update spawn count
+        currentSpawnCount = GameObject.FindGameObjectsWithTag("baditemPrefab").Length; // Update spawn count
     }
 
     public void StopSpawning()
