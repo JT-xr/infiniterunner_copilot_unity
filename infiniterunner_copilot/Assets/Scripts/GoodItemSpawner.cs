@@ -20,6 +20,8 @@ public class GoodItemSpawner : MonoBehaviour
     public float minAngularVelocity = -30f; // Minimum angular velocity (degrees per second)
     public float maxAngularVelocity = 30f;  // Maximum angular velocity (degrees per second)
 
+    public AudioClip goodItemCollectSfx; // Sound effect to play on player collision
+
     private float spawnTimer; // Timer for spawn duration
     private int currentSpawnCount = 0; // Current number of spawned good items
     private float screenWidth; // Screen width in canvas units
@@ -64,6 +66,10 @@ public class GoodItemSpawner : MonoBehaviour
 
         BoxCollider2D collider = goodItem.AddComponent<BoxCollider2D>(); // Add BoxCollider2D component
         collider.isTrigger = true; // Enable trigger for collision detection
+
+        // Attach the sound effect script and set the AudioClip
+        var sfx = goodItem.AddComponent<GoodItemSfxOnPlayerCollision>();
+        sfx.sfxClip = goodItemCollectSfx;
 
         Destroy(goodItem, startLifetime); // Destroy good item after lifetime
         currentSpawnCount++; // Increment spawn count
