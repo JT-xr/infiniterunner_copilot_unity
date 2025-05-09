@@ -38,8 +38,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: -2
-    y: 54
+    x: 0
+    y: 53
     width: 2048
     height: 1099
   m_ShowMode: 4
@@ -144,8 +144,8 @@ MonoBehaviour:
     y: 0
     width: 484
     height: 1043
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -196,8 +196,8 @@ MonoBehaviour:
     y: 671
     width: 1564
     height: 372
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 126}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 17}
@@ -346,8 +346,8 @@ MonoBehaviour:
     y: 0
     width: 1177
     height: 671
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 226}
+  m_MaxSize: {x: 4002, y: 4026}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 20}
@@ -376,8 +376,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project Settings\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 361
-    y: 250
+    x: 0
+    y: 26
     width: 957
     height: 708
   m_SerializedDataModeController:
@@ -441,8 +441,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Simulator\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 385
-    y: 90
+    x: 388
+    y: 24
     width: 1175
     height: 645
   m_SerializedDataModeController:
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_UseMipMap: 0
   m_SimulatorState:
     controlPanelVisible: 0
-    controlPanelWidth: 0
+    controlPanelWidth: NaN
     controlPanelFoldoutKeys:
     - UnityEditor.DeviceSimulation.ApplicationSettingsPlugin
     controlPanelFoldoutValues: 00
@@ -482,7 +482,7 @@ MonoBehaviour:
     pluginStates:
     - '{}'
     - '{}'
-    scale: 24
+    scale: 10
     fitToScreenEnabled: 1
     rotationDegree: 0
     highlightSafeAreaEnabled: 0
@@ -557,7 +557,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 65}
     m_SelectedIDs: 30e10000
     m_LastClickedID: 57648
-    m_ExpandedIDs: 00000000f8b70000fcb70000feb7000000b8000002b800003ce1000078f9000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000008b800000ab800000cb800000eb8000010b80000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -586,7 +586,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f8b70000fab70000fcb70000feb7000000b8000002b80000
+    m_ExpandedIDs: 0000000008b800000ab800000cb800000eb8000010b80000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -666,8 +666,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1562
-    y: 90
+    x: 1565
+    y: 24
     width: 483
     height: 1017
   m_SerializedDataModeController:
@@ -716,8 +716,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
-    x: -2
-    y: 90
+    x: 0
+    y: 24
     width: 386
     height: 645
   m_SerializedDataModeController:
@@ -739,18 +739,18 @@ MonoBehaviour:
       m_ExpandedIDs: 3281fdff4a81fdff1085fdff14fbffff32b70000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: TimerController
-        m_OriginalName: TimerController
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 46850
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 7}
@@ -1321,7 +1321,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.0134928925, y: 0.03149193, z: 0.0004251663, w: 0.999413}
     speed: 2
-    m_Value: {x: -0.013492891, y: 0.031491928, z: 0.00042516625, w: 0.9994129}
+    m_Value: {x: 0.0134928925, y: -0.03149193, z: -0.00042516628, w: -0.99941295}
   m_Size:
     m_Target: 2685.1138
     speed: 2
@@ -1381,8 +1381,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Console\u200B"
   m_Pos:
     serializedVersion: 2
-    x: -2
-    y: 761
+    x: 0
+    y: 695
     width: 1563
     height: 346
   m_SerializedDataModeController:
