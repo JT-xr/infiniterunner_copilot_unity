@@ -15,6 +15,9 @@ public class Spawner : MonoBehaviour
     public float startSpeed = 5f; // Initial speed of the image
     public Canvas canvas; // Reference to the Canvas
 
+    public float minAngularVelocity = -30f; // Minimum angular velocity (degrees per second)
+    public float maxAngularVelocity = 30f;  // Maximum angular velocity (degrees per second)
+
     private float spawnTimer; // Timer for spawn duration
     private int currentSpawnCount = 0; // Current number of spawned images
     private float screenWidth; // Screen width in world units
@@ -42,12 +45,20 @@ public class Spawner : MonoBehaviour
         spawnPosition.z = 0; // Ensure z value is 0
 
         GameObject image = Instantiate(imagePrefab, spawnPosition, Quaternion.identity, canvas.transform); // Instantiate image as child of canvas
+
+        // Add a random initial rotation so items don't rotate in unison
+        float initialZRotation = Random.Range(0f, 360f);
+        image.transform.rotation = Quaternion.Euler(0f, 0f, initialZRotation);
+
         image.tag = "baditemPrefab"; // Set tag for game end logic
         RectTransform rectTransform = image.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = spawnPosition; // Set anchored position
 
         Rigidbody2D rb = image.AddComponent<Rigidbody2D>(); // Add Rigidbody2D component
         rb.linearVelocity = new Vector2(0, -startSpeed); // Set initial velocity
+
+        // Add a slight and slow random rotation using public variables
+        rb.angularVelocity = Random.Range(minAngularVelocity, maxAngularVelocity);
 
         BoxCollider2D collider = image.AddComponent<BoxCollider2D>(); // Add BoxCollider2D component
         collider.isTrigger = true; // Enable trigger for collision detection

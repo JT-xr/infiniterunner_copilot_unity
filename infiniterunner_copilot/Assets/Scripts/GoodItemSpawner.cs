@@ -17,6 +17,9 @@ public class GoodItemSpawner : MonoBehaviour
     public float startSpeed = 3f; // Initial speed of the good item
     public Canvas canvas; // Reference to the Canvas
 
+    public float minAngularVelocity = -30f; // Minimum angular velocity (degrees per second)
+    public float maxAngularVelocity = 30f;  // Maximum angular velocity (degrees per second)
+
     private float spawnTimer; // Timer for spawn duration
     private int currentSpawnCount = 0; // Current number of spawned good items
     private float screenWidth; // Screen width in canvas units
@@ -44,12 +47,20 @@ public class GoodItemSpawner : MonoBehaviour
         spawnPosition.z = 0; // Ensure z value is 0
 
         GameObject goodItem = Instantiate(goodItemPrefab, canvas.transform); // Instantiate good item as child of canvas
+
+        // Add a random initial rotation so items don't rotate in unison
+        float initialZRotation = Random.Range(0f, 360f);
+        goodItem.transform.rotation = Quaternion.Euler(0f, 0f, initialZRotation);
+
         RectTransform rectTransform = goodItem.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = spawnPosition; // Set anchored position
 
         Rigidbody2D rb = goodItem.AddComponent<Rigidbody2D>(); // Add Rigidbody2D component
         rb.gravityScale = 0; // Disable gravity for UI elements
         rb.linearVelocity = new Vector2(0, -startSpeed); // Set initial velocity
+
+        // Add a slight and slow random rotation using public variables
+        rb.angularVelocity = Random.Range(minAngularVelocity, maxAngularVelocity);
 
         BoxCollider2D collider = goodItem.AddComponent<BoxCollider2D>(); // Add BoxCollider2D component
         collider.isTrigger = true; // Enable trigger for collision detection
