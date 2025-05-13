@@ -24,6 +24,16 @@ public class PlayerUICollisionHandler : MonoBehaviour
         {
             Destroy(other.gameObject); // Hide the Bad Item
             Debug.Log("Bad item collided and hidden.");
+            // Flash the screen red
+            ScreenFlash screenFlash = Object.FindFirstObjectByType<ScreenFlash>();
+            if (screenFlash != null)
+            {
+                screenFlash.Flash();
+            }
+            else
+            {
+                Debug.LogWarning("ScreenFlash component not found in the scene!");
+            }
         }
         else
         {
