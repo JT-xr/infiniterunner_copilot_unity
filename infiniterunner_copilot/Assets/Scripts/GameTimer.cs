@@ -72,6 +72,7 @@ public class GameTimer : MonoBehaviour
                 if (restartButton != null)
                 {
                     restartButton.gameObject.SetActive(true);
+                    restartButton.interactable = true;
                 }
 
                 // --- GAME END CONDITIONS ---
@@ -154,6 +155,10 @@ public class GameTimer : MonoBehaviour
 
     private void RestartGame()
     {
+        if (restartButton != null)
+        {
+            restartButton.interactable = false;
+        }
         StartCoroutine(RestartGameCoroutine());
     }
 
@@ -196,10 +201,11 @@ public class GameTimer : MonoBehaviour
         // Set game active after everything is ready and collisions are cleared
         GameManager.isGameActive = true;
 
-        // Hide the restart button
+        // Hide the restart button and re-enable interactable after restart
         if (restartButton != null)
         {
             restartButton.gameObject.SetActive(false);
+            restartButton.interactable = true;
         }
     }
 }
