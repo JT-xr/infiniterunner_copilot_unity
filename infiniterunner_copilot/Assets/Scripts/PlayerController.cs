@@ -84,8 +84,6 @@ public class PlayerController : MonoBehaviour
                 newPosition = rectTransform.anchoredPosition;
                 newPosition.x = targetXPosition;
                 rectTransform.anchoredPosition = newPosition;
-
-                Debug.Log($"Head rotation: {headRotation}, Target X Position: {targetXPosition}");
             }
         }
         else
@@ -110,48 +108,18 @@ public class PlayerController : MonoBehaviour
 
         // Update position
         rectTransform.anchoredPosition = newPosition;
-
-        // Debug.Log("Player position: " + rectTransform.anchoredPosition); // Disabled position debug log
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collision detected with: " + collision.gameObject.name); // Log the name of the collided object
-
-        if (collision.gameObject.CompareTag("goodItemPrefab")) // Check if the tag matches
+        // Only keep logs for score and collision detectors
+        if (collision.gameObject.CompareTag("goodItemPrefab"))
         {
-            Debug.Log("Collision with goodItemPrefab detected!"); // Log if the tag matches
-
             // Add points using ScoreManager (centralized score logic)
             if (ScoreManager.Instance != null)
             {
                 ScoreManager.Instance.AddPoints(3);
             }
-            else
-            {
-                Debug.LogWarning("ScoreManager.Instance is null!");
-            }
         }
-        else
-        {
-            Debug.Log("Collision with an object that does not have the 'goodItemPrefab' tag.");
-            Debug.Log("Collided object's tag: " + collision.gameObject.tag);
-        }
-    }
-}
-
-public class TriggerDebugger : MonoBehaviour
-{
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Global Trigger detected with: " + collision.gameObject.name);
-    }
-}
-
-public class GlobalTriggerDebugger : MonoBehaviour
-{
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Global Trigger detected with: " + collision.gameObject.name);
     }
 }

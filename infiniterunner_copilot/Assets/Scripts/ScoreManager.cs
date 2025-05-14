@@ -38,7 +38,6 @@ public class ScoreManager : MonoBehaviour
         // Prevent score update if not allowed or game is not active
         if (!canUpdateScore || !GameManager.isGameActive)
         {
-            Debug.Log("AddPoints called but ignored because canUpdateScore is false or game is not active.");
             return;
         }
         currentScore += points;

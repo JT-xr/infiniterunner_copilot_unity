@@ -39,10 +39,47 @@ public class Spawner : MonoBehaviour
     {
         if (currentSpawnCount >= spawnLimit) return; // Check spawn limit
 
-        float spawnX = Random.Range(-screenWidth, screenWidth); // Random x position
-        spawnPosition.x = spawnX; // Set x value of spawn position
-        spawnPosition.y = canvas.GetComponent<RectTransform>().rect.height / 2; // Set y value to top of the canvas
-        spawnPosition.z = 0; // Ensure z value is 0
+        // Try up to 10 times to find a non-overlapping spawn position
+        int maxTries = 10;
+        bool foundNonOverlap = false;
+        float spawnX = 0f;
+        Rect newRect = new Rect();
+        RectTransform prefabRect = imagePrefab.GetComponent<RectTransform>();
+        Vector2 itemSize = prefabRect != null ? prefabRect.sizeDelta : new Vector2(50, 50);
+        for (int i = 0; i < maxTries; i++)
+        {
+            spawnX = Random.Range(-screenWidth, screenWidth);
+            spawnPosition.x = spawnX;
+            spawnPosition.y = canvas.GetComponent<RectTransform>().rect.height / 2;
+            spawnPosition.z = 0;
+            newRect = new Rect(new Vector2(spawnPosition.x - itemSize.x / 2, spawnPosition.y - itemSize.y / 2), itemSize);
+
+            // Check overlap with all good and bad items
+            bool overlap = false;
+            foreach (var obj in GameObject.FindGameObjectsWithTag("baditemPrefab"))
+            {
+                RectTransform rt = obj.GetComponent<RectTransform>();
+                if (rt != null)
+                {
+                    Rect otherRect = new Rect(rt.anchoredPosition - rt.sizeDelta / 2, rt.sizeDelta);
+                    if (newRect.Overlaps(otherRect)) { overlap = true; break; }
+                }
+            }
+            if (!overlap)
+            {
+                foreach (var obj in GameObject.FindGameObjectsWithTag("goodItemPrefab"))
+                {
+                    RectTransform rt = obj.GetComponent<RectTransform>();
+                    if (rt != null)
+                    {
+                        Rect otherRect = new Rect(rt.anchoredPosition - rt.sizeDelta / 2, rt.sizeDelta);
+                        if (newRect.Overlaps(otherRect)) { overlap = true; break; }
+                    }
+                }
+            }
+            if (!overlap) { foundNonOverlap = true; break; }
+        }
+        if (!foundNonOverlap) return; // Give up if can't find a spot
 
         GameObject image = Instantiate(imagePrefab, spawnPosition, Quaternion.identity, canvas.transform); // Instantiate image as child of canvas
 

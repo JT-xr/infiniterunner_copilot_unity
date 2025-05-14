@@ -12,32 +12,23 @@ public class PlayerUICollisionHandler : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("OnTriggerEnter2D called with object: " + other.gameObject.name + ", tag: " + other.tag);
-
+        // Only keep logs for score and collision detectors
         if (other.CompareTag("goodItemPrefab")) // Check if the colliding object is a Good Item
         {
             score++; // Increment score
             Destroy(other.gameObject); // Destroy the Good Item
-            Debug.Log("Score: " + score); // Log the updated score
+            Debug.Log("Score: " + score); // Keep score log
         }
         else if (other.CompareTag("baditemPrefab")) // Check if the colliding object is a Bad Item
         {
             Destroy(other.gameObject); // Hide the Bad Item
-            Debug.Log("Bad item collided and hidden.");
             // Flash the screen red
             ScreenFlash screenFlash = Object.FindFirstObjectByType<ScreenFlash>();
             if (screenFlash != null)
             {
                 screenFlash.Flash();
             }
-            else
-            {
-                Debug.LogWarning("ScreenFlash component not found in the scene!");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Unknown tag detected: " + other.tag + " on object: " + other.gameObject.name);
+            // No log except for collision/score
         }
     }
 }

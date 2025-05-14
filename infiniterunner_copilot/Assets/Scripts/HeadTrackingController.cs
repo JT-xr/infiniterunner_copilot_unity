@@ -31,18 +31,7 @@ public class HeadTrackingController : MonoBehaviour
 
     void DebugFaceTracking()
     {
-        if (faceManager.trackables.count > 0)
-        {
-            foreach (ARFace face in faceManager.trackables)
-            {
-                Debug.Log($"Face detected at position: {face.transform.localPosition}");
-                break; // Only log the first face
-            }
-        }
-        else
-        {
-            Debug.Log("No faces detected.");
-        }
+        // Remove all Debug.Log statements from DebugFaceTracking
     }
 
     void Update()
